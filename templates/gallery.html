@@ -48,14 +48,16 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">
-                Thumbnail Gallery
-            </h1>
 
+            <br>
             <a href="/">
                 <h3>Home</h3>
             </a>
-            <br><br>
+            <br>
+
+            <h1 class="page-header">
+                Thumbnail Gallery
+            </h1>
         </div>
 
         <input type="text" 
@@ -69,14 +71,19 @@
                 {% for i in new_term.keys() %}
                     <div class="column">
                         <li> 
-                            <img class="img-responsive" 
-                                width="40%"
-                                src="{{url_for('send_image', filename=i)}}">
-                            <br>
                             <a href="#"> 
-                                {{i}} : {{new_term[i]}}
+                                <strong>
+                                    <span style="color:red;">{{i}}</span>
+                                </strong>
+                                <br><br>
+
+                                <img class="img-responsive" 
+                                    width="40%"
+                                    src="{{url_for('send_image', filename=i)}}">
+                                <br>
+                                {{new_term[i]}}
                             </a> 
-                            <br><br>
+                            <br><hr>
                         </li>
                     </div>
                 {% endfor %}

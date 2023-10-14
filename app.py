@@ -54,13 +54,12 @@ def get_gallery():
     target = os.path.join(APP_ROOT, 'images/')
     image_names = os.listdir('./images')
     pytesseract.pytesseract.tesseract_cmd = 'static/Tesseract-OCR/tesseract.exe'
-    tessdata_dir_config = 'static/Tesseract-OCR/tessdata'
 
     for i in image_names:
         destination = "/".join([target, i])
         image = Image.open(destination)
-        text = pytesseract.image_to_string(image, lang="eng", config=tessdata_dir_config)
-        term = {i : set(text.split())}
+        text = pytesseract.image_to_string(image, lang="eng")
+        term = {i : text}
         new_term.update(term)
 
     return render_template("gallery.html", 
@@ -75,4 +74,4 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
