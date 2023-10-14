@@ -8,6 +8,7 @@
 import os
 import pytesseract
 from PIL import Image
+from static.YOLO import yolo_detection_images as yolo
 
 # # from HostTor import VicksTor
 # import VicksTor as vix
@@ -58,8 +59,14 @@ def get_gallery():
     for i in image_names:
         destination = "/".join([target, i])
         image = Image.open(destination)
-        text = pytesseract.image_to_string(image, lang="eng")
-        term = {i : text}
+
+        try:
+            text = pytesseract.image_to_string(image, lang="eng")
+            yolo_list = yolo.YOLO(inputimage = destination, path = 'static/YOLO/')
+        except:
+            pass
+        
+        term = {i : (set(text.split()), set(yolo_list))}
         new_term.update(term)
 
     return render_template("gallery.html", 
