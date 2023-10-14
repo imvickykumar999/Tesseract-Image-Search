@@ -29,24 +29,12 @@ def upload():
     else:
         pass
 
-    pytesseract.pytesseract.tesseract_cmd = 'Tesseract-OCR/tesseract.exe'
     for upload in request.files.getlist("file"):
         filename = upload.filename
         destination = "/".join([target, filename])
         upload.save(destination)
-
-    new_term = {}
-    image_names = os.listdir('./images')
-    for i in image_names:
-        destination = "/".join([target, i])
-        image = Image.open(destination)
-        text = pytesseract.image_to_string(image, lang="eng")
-        term = {filename : text.split()}
-        new_term.update(term)
     
-    return render_template("gallery.html", 
-                           image_names=image_names,
-                           new_term=new_term)
+    return render_template("complete.html")
 
 @app.route('/upload/<filename>')
 def send_image(filename):
@@ -54,8 +42,25 @@ def send_image(filename):
 
 @app.route('/gallery')
 def get_gallery():
+    new_term = {}
+
+    target = os.path.join(APP_ROOT, 'images/')
     image_names = os.listdir('./images')
-    return render_template("gallery.html", image_names=image_names)
+    pytesseract.pytesseract.tesseract_cmd = 'Tesseract-OCR/tesseract.exe'
+    
+    for i in image_names:
+        destination = "/".join([target, i])
+        image = Image.open(destination)
+        text = pytesseract.image_to_string(image, lang="eng")
+        term = {i : text.split()}
+        new_term.update(term)
+
+    return render_template("gallery.html", 
+                           new_term=new_term)
+
+@app.route('/upload')
+def upload_complete():
+    return render_template('complete.html')
 
 @app.route('/about')
 def about():
