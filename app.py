@@ -9,6 +9,10 @@ import os
 import pytesseract
 from PIL import Image
 
+# from HostTor import VicksTor
+import VicksTor as vix
+vix.run_server('flask')
+
 from flask import (
     Flask, 
     request, 
@@ -71,4 +75,4 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
