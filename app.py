@@ -52,7 +52,7 @@ def get_gallery():
         destination = "/".join([target, i])
         image = Image.open(destination)
         text = pytesseract.image_to_string(image, lang="eng")
-        term = {i : text.split()}
+        term = {i : set(text.split())}
         new_term.update(term)
 
     return render_template("gallery.html", 
