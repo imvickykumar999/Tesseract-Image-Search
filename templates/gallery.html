@@ -66,16 +66,17 @@
             onkeyup="myFunction()" 
             placeholder="Search for names..">
 
+        <br><br>
         <ul id="myUL">
             <div class="row">
                 {% for i in image_names %}
                     <div class="column">
                         <li> 
+                            <img class="img-responsive" 
+                                width="40%"
+                                src="{{url_for('send_image', filename=i)}}">
+                            <br>
                             <a href="#"> 
-                                <img class="img-responsive" 
-                                    width="40%"
-                                    src="{{url_for('send_image', filename=i)}}">
-                                <br>
                                 {{i}} 
                             </a> 
                             <br><br>

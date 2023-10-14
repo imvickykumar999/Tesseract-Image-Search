@@ -29,20 +29,21 @@ def upload():
     else:
         pass
 
-    new_term = {}
     pytesseract.pytesseract.tesseract_cmd = 'Tesseract-OCR/tesseract.exe'
-
     for upload in request.files.getlist("file"):
         filename = upload.filename
         destination = "/".join([target, filename])
         upload.save(destination)
 
+    new_term = {}
+    image_names = os.listdir('./images')
+    for i in image_names:
+        destination = "/".join([target, i])
         image = Image.open(destination)
         text = pytesseract.image_to_string(image, lang="eng")
         term = {filename : text.split()}
         new_term.update(term)
-
-    image_names = os.listdir('./images')
+    
     return render_template("gallery.html", 
                            image_names=image_names,
                            new_term=new_term)
