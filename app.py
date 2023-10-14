@@ -1,10 +1,7 @@
 
 import os
-import requests
 import pytesseract
 from PIL import Image
-
-from bs4 import BeautifulSoup as bs
 from flask import (
     Flask, 
     request, 
@@ -46,12 +43,13 @@ def get_gallery():
 
     target = os.path.join(APP_ROOT, 'images/')
     image_names = os.listdir('./images')
-    pytesseract.pytesseract.tesseract_cmd = 'Tesseract-OCR/tesseract.exe'
-    
+    pytesseract.pytesseract.tesseract_cmd = 'static/Tesseract-OCR/tesseract.exe'
+    tessdata_dir_config = 'static/Tesseract-OCR/tessdata'
+
     for i in image_names:
         destination = "/".join([target, i])
         image = Image.open(destination)
-        text = pytesseract.image_to_string(image, lang="eng")
+        text = pytesseract.image_to_string(image, lang="eng", config=tessdata_dir_config)
         term = {i : set(text.split())}
         new_term.update(term)
 
