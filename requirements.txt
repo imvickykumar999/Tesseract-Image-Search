@@ -16,3 +16,5 @@ WTForms==2.1
 bs4
 requests
 html5lib==1.0.1
+pytesseract
+pillow
