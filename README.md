@@ -1,6 +1,6 @@
 >## `Search Image via Text using Tesseract OCR`
 >
->![image](static/darkweb.png)
+>![image](https://github.com/imvickykumar999/Tesseract-Image-Search/assets/50515418/a8f13c27-4b8c-4eec-824c-0a8adbfd9cb3)
 
 ## `Steps to run`
 
