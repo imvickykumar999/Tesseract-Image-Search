@@ -1,11 +1,17 @@
 
+# python3 -m venv env
+# env\Scripts\activate
+# pip install -r requirements.txt
+# python app.py
+# deactivate
+
 import os
 import pytesseract
 from PIL import Image
+
 from flask import (
     Flask, 
     request, 
-    redirect,
     render_template, 
     send_from_directory
 )
@@ -59,26 +65,6 @@ def get_gallery():
 @app.route('/upload')
 def upload_complete():
     return render_template('complete.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-@app.route('/home')
-def home():
-    return render_template('home.html')
-
-@app.route('/skills')
-def skills():
-    return render_template('skills.html')
-
-@app.route('/news')
-def news():
-    return redirect('https://imvickykumar999.pythonanywhere.com/')
 
 @app.errorhandler(404)
 def page_not_found(e):
