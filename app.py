@@ -9,9 +9,9 @@ import os
 import pytesseract
 from PIL import Image
 
-# from HostTor import VicksTor
-import VicksTor as vix
-vix.run_server('flask')
+# # from HostTor import VicksTor
+# import VicksTor as vix
+# vix.run_server('flask')
 
 from flask import (
     Flask, 
